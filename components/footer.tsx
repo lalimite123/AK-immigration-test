@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "luc
 import Link from "next/link"
 import { motion } from "framer-motion"
 
+
 // Mock language context - replace with your actual implementation
 const useLanguage = () => ({
     t: (key: string) => {
@@ -128,7 +129,13 @@ const Footer = () => {
                             <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-white/95">{t("footer.contact_title")}</h3>
                             <div className="space-y-4">
                                 {[
-                                    { icon: Phone, content: "+49 173 899 26 90", href: "tel:+4917389926900" },
+                                
+                                    { icon: Phone,
+
+                                        content: "+49 173 899 26 90", 
+                                        href: "tel:+4917389926900" },
+
+
                                     { icon: Mail, content: "info@termiconsult.com", href: "mailto:info@termiconsult.com" },
                                     {
                                         icon: MapPin,
