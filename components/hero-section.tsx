@@ -84,7 +84,7 @@ export function HeroSection() {
         setSlideKey(prev => prev + 1) // Incrémente la clé pour re-déclencher l'animation
         setIsTransitioning(false)
       }, 150)
-    }, 5000)
+    }, 15000) // Changé de 5000ms (5s) à 60000ms (60s)
 
     return () => clearInterval(interval)
   }, [isPlaying])
@@ -125,8 +125,8 @@ export function HeroSection() {
   const currentSlideData = heroSlides[currentSlide]
 
   return (
-    <section className="relative h-[401px] overflow-hidden">
-      {/* Background Images avec preload */}
+    <section className="relative h-[401px] overflow-hidden mt-[72px] md:mt-[112px]">
+      {/* Background Images */}
       <div className="absolute inset-0">
         {heroSlides.map((slide, index) => (
           <div
@@ -143,9 +143,17 @@ export function HeroSection() {
           />
         ))}
       </div>
+      
+      {/* Calque flou entre les images et le texte */}
+      <div 
+        className="absolute inset-0 backdrop-blur-sm bg-black/10 z-10"
+        style={{
+          backdropFilter: 'blur(3px)',
+        }}
+      />
 
       {/* Content Container */}
-      <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
+      <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 z-20">
         <div className="flex items-center h-full mx-0">
           <div key={slideKey} className={`max-w-2xl text-white transition-all duration-500 ease-out ${
             isTransitioning 
@@ -196,7 +204,7 @@ export function HeroSection() {
         </div>
 
         {/* Navigation Controls */}
-        <div className="absolute bottom-4 left-4 sm:left-6 lg:left-8 flex items-center space-x-4">
+        <div className="absolute bottom-4 left-4 sm:left-6 lg:left-8 flex items-center space-x-4 z-20">
           {/* Play/Pause Button */}
           <button
             onClick={togglePlayPause}
@@ -224,7 +232,7 @@ export function HeroSection() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-all duration-300 mx-0 px-2 hover:scale-110 transform"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-all duration-300 mx-0 px-2 hover:scale-110 transform z-20"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-6 h-6" />
@@ -232,7 +240,7 @@ export function HeroSection() {
 
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-all duration-300 hover:scale-110 transform"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-all duration-300 hover:scale-110 transform z-20"
           aria-label="Next slide"
         >
           <ChevronRight className="w-6 h-6" />
@@ -240,7 +248,7 @@ export function HeroSection() {
       </div>
 
       {/* Slide Counter */}
-      <div className="absolute bottom-6 right-4 sm:right-6 lg:right-8 text-white text-sm">
+      <div className="absolute bottom-6 right-4 sm:right-6 lg:right-8 text-white text-sm z-20">
         {currentSlide + 1} / {heroSlides.length}
       </div>
     </section>

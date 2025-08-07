@@ -9,10 +9,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <Header />
-      {/* Add padding-top to account for fixed header */}
-      <div className="pt-24 md:pt-28">
-        <HeroSection />
-      </div>
+      {/* Hero section directly after header without padding */}
+      <HeroSection />
       
       {/* About section - corresponds to /#about in header */}
       <section id="about">
