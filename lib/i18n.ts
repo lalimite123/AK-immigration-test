@@ -138,6 +138,34 @@ export interface Translations {
     directions: string
     view_larger: string
   }
+  impressum: {
+    badge: string
+    title: string
+    subtitle: string
+    company_info: string
+    contact_info: string
+    legal_info: string
+    disclaimer: string
+    data_protection: string
+  }
+  footer: {
+    description: string
+    quick_links: string
+    about_link: string
+    services_link: string
+    immigration_link: string
+    contact_link: string
+    consultation_link: string
+    services_title: string
+    student_visa: string
+    work_visa: string
+    family_reunion: string
+    business_visa: string
+    document_assistance: string
+    contact_title: string
+    rights: string
+    designed: string
+  }
   common: {
     language_selector: string
     consultation_cta: string
@@ -288,6 +316,34 @@ export const translations: Record<Language, Translations> = {
       directions: "Obtenir l'itinéraire",
       view_larger: "Voir sur Google Maps",
     },
+    impressum: {
+      badge: "Mentions Légales",
+      title: "Impressum",
+      subtitle: "Informations légales et mentions obligatoires conformément au droit allemand",
+      company_info: "Informations sur l'entreprise",
+      contact_info: "Coordonnées",
+      legal_info: "Informations légales",
+      disclaimer: "Clause de non-responsabilité",
+      data_protection: "Protection des données",
+    },
+    footer: {
+      description: "AKOR Immigration est votre partenaire de confiance pour l'immigration en Allemagne. Nous vous aidons à réaliser vos rêves d'installation et de vie en Allemagne.",
+      quick_links: "Liens rapides",
+      about_link: "À propos",
+      services_link: "Services",
+      immigration_link: "Immigration",
+      contact_link: "Contact",
+      consultation_link: "Consultation gratuite",
+      services_title: "Types de Visas",
+      student_visa: "Visa Étudiant",
+      work_visa: "Visa Travail Qualifié",
+      family_reunion: "Regroupement Familial",
+      business_visa: "Visa Investisseur",
+      document_assistance: "Assistance aux Documents",
+      contact_title: "Contactez-Nous",
+      rights: "Tous droits réservés",
+      designed: "Conçu par AKOR Immigration",
+    },
     common: {
       language_selector: "FR Français",
       consultation_cta: "Consultation gratuite",
@@ -435,6 +491,34 @@ export const translations: Record<Language, Translations> = {
       office_info: "Unser Büro",
       directions: "Route abrufen",
       view_larger: "Auf Google Maps anzeigen",
+    },
+    impressum: {
+      badge: "Impressum",
+      title: "Impressum",
+      subtitle: "Rechtliche Informationen und Pflichtangaben gemäß deutschem Recht",
+      company_info: "Unternehmensinformationen",
+      contact_info: "Kontaktdaten",
+      legal_info: "Rechtliche Informationen",
+      disclaimer: "Haftungsausschluss",
+      data_protection: "Datenschutz",
+    },
+    footer: {
+      description: "AKOR Immigration ist Ihr Vertrauenspartner für Einwanderung in Deutschland. Wir unterstützen Sie bei der Erfüllung Ihrer Träume der Ansiedlung und des Lebens in Deutschland.",
+      quick_links: "Schnelle Links",
+      about_link: "Über uns",
+      services_link: "Dienstleistungen",
+      immigration_link: "Einwanderung",
+      contact_link: "Kontakt",
+      consultation_link: "Kostenlose Beratung",
+      services_title: "Visastypen",
+      student_visa: "Studentenvisum",
+      work_visa: "Qualifiziertes Arbeitsvisum",
+      family_reunion: "Familiennachzug",
+      business_visa: "Investorenvisum",
+      document_assistance: "Dokumentenunterstützung",
+      contact_title: "Kontaktieren Sie uns",
+      rights: "Alle Rechte vorbehalten",
+      designed: "Entworfen von AKOR Immigration",
     },
     common: {
       language_selector: "DE Deutsch",
