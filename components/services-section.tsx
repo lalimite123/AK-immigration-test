@@ -24,41 +24,13 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
-
-// Mock language context
-const useLanguage = () => ({
-    t: (key: string) => {
-        const translations: Record<string, string> = {
-            "services.badge": "Services d'Immigration",
-            "services.title": "Types de Visas pour l'Allemagne",
-            "services.subtitle": "Nous vous accompagnons à chaque étape de votre processus d'immigration pour assurer votre installation réussie en Allemagne",
-            "services.student.title": "Visa Étudiant",
-            "services.student.description": "Pour poursuivre vos études dans une université allemande prestigieuse",
-            "services.work.title": "Visa Travail Qualifié",
-            "services.work.description": "Pour exercer votre profession en Allemagne avec un statut privilégié",
-            "services.freelance.title": "Visa Freelance",
-            "services.freelance.description": "Pour développer votre activité indépendante sur le marché allemand",
-            "services.family.title": "Regroupement Familial",
-            "services.family.description": "Pour réunir votre famille et construire votre vie en Allemagne",
-            "services.business.title": "Visa Investisseur",
-            "services.business.description": "Pour entreprendre et développer votre activité économique en Allemagne",
-            "services.tourist.title": "Visa Touriste",
-            "services.tourist.description": "Pour découvrir l'Allemagne et ses merveilles culturelles",
-            "services.steps": "Processus d'obtention du",
-            "services.close": "Fermer",
-            "services.quote": "Demander un accompagnement",
-            "services.duration": "Délai d'obtention",
-            "services.success_rate": "Taux de réussite",
-        }
-        return translations[key] || key
-    },
-})
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const visaData = [
     {
         id: "student",
-        title: "Visa Étudiant",
-        description: "Pour poursuivre vos études dans une université allemande prestigieuse et accéder à une formation d'excellence reconnue mondialement",
+        titleKey: "services.student.title",
+        descriptionKey: "services.student.description",
         icon: GraduationCap,
         color: "from-blue-500 to-blue-600",
         duration: "2-8 semaines",
@@ -72,8 +44,8 @@ const visaData = [
     },
     {
         id: "work",
-        title: "Visa Travail Qualifié",
-        description: "Pour exercer votre profession en Allemagne avec un statut privilégié et accéder à l'un des marchés du travail les plus dynamiques d'Europe",
+        titleKey: "services.work.title",
+        descriptionKey: "services.work.description",
         icon: Briefcase,
         color: "from-green-500 to-green-600",
         duration: "3-6 semaines",
@@ -87,8 +59,8 @@ const visaData = [
     },
     {
         id: "freelance",
-        title: "Visa Freelance",
-        description: "Pour développer votre activité indépendante sur le marché allemand et bénéficier d'un environnement favorable aux entrepreneurs",
+        titleKey: "services.freelance.title",
+        descriptionKey: "services.freelance.description",
         icon: Users,
         color: "from-purple-500 to-purple-600",
         duration: "4-8 semaines",
@@ -102,8 +74,8 @@ const visaData = [
     },
     {
         id: "family",
-        title: "Regroupement Familial",
-        description: "Pour réunir votre famille et construire ensemble votre nouvelle vie en Allemagne dans un cadre stable et sécurisant",
+        titleKey: "services.family.title",
+        descriptionKey: "services.family.description",
         icon: Heart,
         color: "from-pink-500 to-pink-600",
         duration: "6-12 semaines",
@@ -117,8 +89,8 @@ const visaData = [
     },
     {
         id: "business",
-        title: "Visa Investisseur",
-        description: "Pour entreprendre et développer votre activité économique en Allemagne en bénéficiant d'un environnement d'affaires stable et innovant",
+        titleKey: "services.business.title",
+        descriptionKey: "services.business.description",
         icon: Building,
         color: "from-orange-500 to-orange-600",
         duration: "8-12 semaines",
@@ -132,8 +104,8 @@ const visaData = [
     },
     {
         id: "tourist",
-        title: "Visa Touriste",
-        description: "Pour découvrir l'Allemagne, son patrimoine culturel exceptionnel et sa qualité de vie lors d'un séjour temporaire",
+        titleKey: "services.tourist.title",
+        descriptionKey: "services.tourist.description",
         icon: Plane,
         color: "from-teal-500 to-teal-600",
         duration: "1-3 semaines",
@@ -236,9 +208,9 @@ export function ServicesSection() {
                                                 <IconComponent className="w-8 h-8 text-white" />
                                             </div>
 
-                                            <h3 className="text-xl font-bold text-gray-900 text-center mb-3">{visa.title}</h3>
+                                            <h3 className="text-xl font-bold text-gray-900 text-center mb-3">{t(visa.titleKey)}</h3>
                                             <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow text-justify px-2">
-                                                {visa.description}
+                                                {t(visa.descriptionKey)}
                                             </p>
 
                                             {/* Stats */}
@@ -254,7 +226,7 @@ export function ServicesSection() {
                                             </div>
 
                                             <div className="flex items-center justify-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors mt-auto">
-                                                <span className="text-sm">Découvrir le processus</span>
+                                                <span className="text-sm">{t("common.discover_process")}</span>
                                                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                             </div>
                                         </div>
@@ -305,8 +277,8 @@ export function ServicesSection() {
                                             <selectedVisa.icon className="w-8 h-8 text-white" />
                                         </div>
                                         <div>
-                                            <DialogTitle className="text-2xl font-bold text-gray-900">{selectedVisa.title}</DialogTitle>
-                                            <p className="text-gray-600 mt-1 text-justify">{selectedVisa.description}</p>
+                                            <DialogTitle className="text-2xl font-bold text-gray-900">{t(selectedVisa.titleKey)}</DialogTitle>
+                                            <p className="text-gray-600 mt-1 text-justify">{t(selectedVisa.descriptionKey)}</p>
                                             <div className="flex gap-4 mt-3">
                                                 <Badge variant="outline" className="text-xs">
                                                     <Clock className="w-3 h-3 mr-1" />
@@ -331,7 +303,7 @@ export function ServicesSection() {
 
                                 <div className="mb-8">
                                     <h3 className="text-xl font-bold text-gray-900 mb-6">
-                                        {t("services.steps")} {selectedVisa.title}
+                                        {t("services.steps")} {t(selectedVisa.titleKey)}
                                     </h3>
                                     <div className="space-y-4">
                                         {selectedVisa.steps.map((step, index) => (

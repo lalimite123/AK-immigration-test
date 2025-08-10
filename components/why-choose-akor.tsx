@@ -1,31 +1,34 @@
-import { UserCheck, Map, ShieldCheck, Languages } from "lucide-react"
+"use client"
 
-const features = [
-  {
-    icon: <UserCheck className="text-blue-600 w-6 h-6 mb-3" />,
-    title: "Service Personnalisé",
-    description:
-      "Chaque dossier est traité avec une attention particulière, selon votre situation et vos objectifs en Allemagne.",
-  },
-  {
-    icon: <Map className="text-blue-600 w-6 h-6 mb-3" />,
-    title: "Accompagnement Complet",
-    description: "Nous vous guidons de l'arrivée à l'installation : visa, logement, assurance, enregistrement...",
-  },
-  {
-    icon: <ShieldCheck className="text-blue-600 w-6 h-6 mb-3" />,
-    title: "Sécurité des Données",
-    description:
-      "Toutes vos données sont protégées et traitées avec confidentialité selon les normes européennes (RGPD).",
-  },
-  {
-    icon: <Languages className="text-blue-600 w-6 h-6 mb-3" />,
-    title: "Support Multilingue",
-    description: "Notre équipe parle plusieurs langues pour mieux vous accompagner, où que vous soyez dans le monde.",
-  },
-]
+import { UserCheck, Map, ShieldCheck, Languages } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export function WhyChooseAkor() {
+  const { t } = useLanguage()
+
+  const features = [
+    {
+      icon: <UserCheck className="text-blue-600 w-6 h-6 mb-3" />,
+      title: t("about.features.personalized.title"),
+      description: t("about.features.personalized.description"),
+    },
+    {
+      icon: <Map className="text-blue-600 w-6 h-6 mb-3" />,
+      title: t("about.features.complete.title"),
+      description: t("about.features.complete.description"),
+    },
+    {
+      icon: <ShieldCheck className="text-blue-600 w-6 h-6 mb-3" />,
+      title: t("about.features.security.title"),
+      description: t("about.features.security.description"),
+    },
+    {
+      icon: <Languages className="text-blue-600 w-6 h-6 mb-3" />,
+      title: t("about.features.multilingual.title"),
+      description: t("about.features.multilingual.description"),
+    },
+  ]
+
   return (
     <section className="py-16 bg-white relative overflow-hidden">
       {/* Triangular background shape - More sharp and visible */}
@@ -64,8 +67,8 @@ export function WhyChooseAkor() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 relative z-10">
         <div className="text-center mb-12">
-          <p className="text-blue-600 font-medium mb-2 text-sm">Best immigration service</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Pourquoi choisir Akor Immigration</h2>
+          <p className="text-blue-600 font-medium mb-2 text-sm">{t("about.badge")}</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">{t("about.title")}</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

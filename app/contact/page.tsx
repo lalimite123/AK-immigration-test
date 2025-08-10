@@ -7,30 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Phone, Mail, MapPin, Clock, MessageSquare, Star, CheckCircle, Navigation, ExternalLink } from "lucide-react"
 import { Header } from "@/components/header"
 import Footer from "@/components/footer"
-
-// Mock language context
-const useLanguage = () => ({
-    t: (key: string) => {
-        const translations: Record<string, string> = {
-            "contact.phone": "Téléphone",
-            "contact.phone_desc": "Service de consultation immédiate par appel",
-            "contact.email": "Email",
-            "contact.email_desc": "Réponse rapide et personnalisée à vos demandes",
-            "contact.address": "Adresse",
-            "contact.address_desc": "Notre bureau principal au cœur de Düren",
-            "contact.hours": "Horaires",
-            "contact.hours_desc": "Disponibles en semaine de 8h à 18h",
-            "contact.badge": "Experts à Votre Service",
-            "contact.title": "Contactez-Nous",
-            "contact.subtitle":
-                "Notre équipe de spécialistes est prête à vous guider à chaque étape de votre projet d'immigration en Allemagne",
-            "contact.office_info": "Notre Bureau",
-            "contact.directions": "Obtenir l'itinéraire",
-            "contact.view_larger": "Voir sur Google Maps",
-        }
-        return translations[key] || key
-    },
-})
+import { useLanguage } from "@/contexts/LanguageContext"
 
 interface ContactInfo {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
@@ -53,7 +30,7 @@ export default function Contact() {
             description: t("contact.phone_desc"),
             gradient: "from-blue-500 to-blue-600",
             hoverGradient: "group-hover:from-blue-600 group-hover:to-blue-700",
-            action: () => window.open("tel:+4917389926900", "_self"),
+            action: () => window.open("https://wa.me/491738992690?text=Bonjour%20AKOR%20Immigration%20Consultant", "_blank"),
         },
         {
             icon: Mail,
@@ -113,10 +90,10 @@ export default function Contact() {
                             <Button
                                 size="lg"
                                 className="bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-3"
-                                onClick={() => window.open("tel:+4917389926900", "_self")}
+                                onClick={() => window.open("https://wa.me/491738992690?text=Bonjour%20AKOR%20Immigration%20Consultant", "_blank")}
                             >
                                 <Phone className="w-5 h-5 mr-2" />
-                                Appelez-nous maintenant
+                                {t("common.contact_us")}
                             </Button>
                             <Button
                                 size="lg"
@@ -125,7 +102,7 @@ export default function Contact() {
                                 onClick={() => window.open("mailto:info@termiconsult.com", "_self")}
                             >
                                 <MessageSquare className="w-5 h-5 mr-2" />
-                                Écrivez-nous
+                                {t("common.write_to_us")}
                             </Button>
                         </div>
                     </div>

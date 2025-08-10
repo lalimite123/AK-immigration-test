@@ -4,27 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Phone, Mail, Search, Facebook, Instagram, Menu, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { scrollToTop } from "../lib/utils"
-
-// Mock language context - you can replace this with your actual implementation
-const useLanguage = () => ({
-  t: (key: string) => {
-    const translations: Record<string, string> = {
-      "header.phone": "Whatsapp:",
-      "header.whatsapp": "Whatsapp:",
-      "header.whatsapp.number": "+49 173 899 26 90",
-      "header.whatsapp.message": "Envoyer un message",
-      "header.email": "EMAIL:",
-      "header.consultation": "CONSULTATION GRATUITE",
-      "header.about": "À PROPOS",
-      "header.services": "SERVICES",
-      "header.impressum": "IMPRESSUM",
-      "header.contact": "CONTACT",
-    }
-    return translations[key] || key
-  },
-})
+import { useLanguage } from "@/contexts/LanguageContext"
+import { LanguageSelector } from "@/components/ui/language-selector"
 
 // Composant WhatsApp SVG personnalisé
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -54,22 +37,38 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
     </g>
   </svg>
 )
-const LanguageSelector = () => (
-  <div className="flex items-center gap-2 text-background">
-    <div className="w-5 h-5 rounded-full bg-background/20 flex items-center justify-center">
-      <span className="text-xs">🌐</span>
-    </div>
-    <span className="text-sm font-medium">FR Français</span>
-  </div>
-)
 
 export function Header() {
   const { t } = useLanguage()
   const router = useRouter()
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
 
   const isActive = (path: string) => pathname === path
+
+  // Fonction pour vérifier quelle section est active
+  const checkActiveSection = () => {
+    if (pathname !== "/") return
+    
+    const hash = typeof window !== 'undefined' ? window.location.hash : ''
+    if (hash === '#about' || hash === '#services') {
+      setActiveSection(hash)
+    } else {
+      setActiveSection("")
+    }
+  }
+
+  useEffect(() => {
+    checkActiveSection()
+    
+    const handleHashChange = () => {
+      checkActiveSection()
+    }
+    
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [pathname])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -82,6 +81,9 @@ export function Header() {
       const element = document.getElementById("services")
       if (element) {
         element.scrollIntoView({ behavior: "smooth" })
+        // Mettre à jour l'URL avec l'ancre
+        window.history.pushState(null, '', '#services')
+        setActiveSection('#services')
       } else {
         scrollToTop() // fallback si pas trouvé
       }
@@ -98,6 +100,9 @@ export function Header() {
       const element = document.getElementById("about")
       if (element) {
         element.scrollIntoView({ behavior: "smooth" })
+        // Mettre à jour l'URL avec l'ancre
+        window.history.pushState(null, '', '#about')
+        setActiveSection('#about')
       } else {
         scrollToTop() // fallback si pas trouvé
       }
@@ -123,7 +128,7 @@ export function Header() {
                 >
                   <WhatsAppIcon className="h-[18px] w-[18px]" />
                   <span className="font-medium">{t("header.phone")}</span>
-                  <span className="text-primary-dark">+49 173 899 26 90</span>
+                  <span className="text-primary-dark">{t("header.whatsapp_number")}</span>
                 </a>
                 <div className="flex items-center gap-2 text-primary">
                   <Mail className="h-4 w-4" />
@@ -131,11 +136,15 @@ export function Header() {
                   <span className="text-primary-dark">info@termiconsult.com</span>
                 </div>
               </div>
-              <Link href="/contact">
+              <a 
+                href="https://wa.me/491738992690?text=Bonjour%2C%20je%20souhaite%20une%20consultation%20gratuite" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 <Button variant="default" className="bg-gradient-primary hover:bg-primary-dark transition-smooth">
                   {t("header.consultation")}
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -157,7 +166,7 @@ export function Header() {
                 <a 
                   href="#about" 
                   className={`font-bold transition-smooth cursor-pointer ${
-                    pathname === "/" && typeof window !== 'undefined' && window.location.hash === "#about"
+                    activeSection === "#about"
                       ? "text-background border-b-2 border-background"
                       : "text-background/90 hover:text-background"
                   }`}
@@ -168,7 +177,7 @@ export function Header() {
                 <a 
                   href="#services" 
                   className={`font-bold transition-smooth cursor-pointer ${
-                    pathname === "/" && typeof window !== 'undefined' && window.location.hash === "#services"
+                    activeSection === "#services"
                       ? "text-background border-b-2 border-background"
                       : "text-background/90 hover:text-background"
                   }`}
@@ -232,7 +241,11 @@ export function Header() {
                 <div className="flex flex-col space-y-4 pt-4">
                   <a
                     href="#about"
-                    className="text-background/90 hover:text-background font-bold transition-smooth cursor-pointer"
+                    className={`font-bold transition-smooth cursor-pointer ${
+                      activeSection === "#about"
+                        ? "text-background border-b-2 border-background pb-1"
+                        : "text-background/90 hover:text-background"
+                    }`}
                     onClick={(e) => {
                       handleAboutClick(e)
                       setIsMobileMenuOpen(false)
@@ -241,8 +254,12 @@ export function Header() {
                     {t("header.about")}
                   </a>
                   <a
-                    href="#services"
-                    className="text-background/90 hover:text-background font-bold transition-smooth cursor-pointer"
+                    href="/services"
+                    className={`font-bold transition-smooth cursor-pointer ${
+                      activeSection === "/services"
+                        ? "text-background border-b-2 border-background pb-1"
+                        : "text-background/90 hover:text-background"
+                    }`}
                     onClick={(e) => {
                       handleServicesClick(e)
                       setIsMobileMenuOpen(false)
@@ -253,7 +270,9 @@ export function Header() {
                   <Link
                     href="/impressum"
                     className={`font-bold transition-smooth ${
-                      isActive("/impressum") ? "text-background font-bold" : "text-background/90 hover:text-background"
+                      isActive("/impressum") 
+                        ? "text-background border-b-2 border-background pb-1" 
+                        : "text-background/90 hover:text-background"
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -262,7 +281,9 @@ export function Header() {
                   <Link
                     href="/contact"
                     className={`font-bold transition-smooth ${
-                      isActive("/contact") ? "text-background font-bold" : "text-background/90 hover:text-background"
+                      isActive("/contact") 
+                        ? "text-background border-b-2 border-background pb-1" 
+                        : "text-background/90 hover:text-background"
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -284,7 +305,11 @@ export function Header() {
 
                   {/* Mobile CTA Button */}
                   <div className="pt-4">
-                    <Link href="/contact">
+                    <a 
+                      href="https://wa.me/491738992690?text=Bonjour%2C%20je%20souhaite%20une%20consultation%20gratuite" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
                       <Button
                         variant="default"
                         className="w-full bg-primary hover:bg-primary-dark transition-smooth"
@@ -292,7 +317,7 @@ export function Header() {
                       >
                         {t("header.consultation")}
                       </Button>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

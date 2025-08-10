@@ -2,11 +2,18 @@ import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
   title: 'Akor Immigration',
   description: 'Akor Immigration is a company that helps you get your visa to travel in Germany.',
   generator: 'Akor Immigration',
+  alternates: {
+    languages: {
+      'fr': '/fr',
+      'de': '/de',
+    },
+  },
 }
 
 export default function RootLayout({
@@ -15,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <style>{`
 html {
@@ -25,7 +32,11 @@ html {
 }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   )
 }

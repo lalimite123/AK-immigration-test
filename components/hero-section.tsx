@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react"
-import { BlurText } from "@/components/ui/blur-text" // Ajustez le chemin selon votre structure
+import { BlurText } from "@/components/ui/blur-text"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 interface HeroSlide {
   id: number
@@ -17,62 +18,58 @@ interface HeroSlide {
   }>
 }
 
-const heroSlides: HeroSlide[] = [
-  {
-    id: 1,
-    title: "AKOR Immigration - Votre Partenaire de Confiance",
-    description:
-      "Experts en immigration allemande depuis plus de 10 ans. Nous vous accompagnons dans toutes vos démarches pour réussir votre projet d'installation en Allemagne.",
-    backgroundImage: "/img1.svg",
-    buttons: [{ text: "Découvrir nos services", href: "#services", variant: "outline" }],
-  },
-  {
-    id: 2,
-    title: "Accompagnement Personnalisé à Chaque Étape",
-    description:
-      "De la préparation de votre dossier à votre installation, notre équipe vous guide avec expertise et bienveillance pour maximiser vos chances de succès.",
-    backgroundImage: "/img2.svg",
-    buttons: [{ text: "Consultation gratuite", href: "/contact", variant: "outline" }],
-  },
-  {
-    id: 3,
-    title: "Visa de Travail - Opportunités Professionnelles",
-    description:
-      "Obtenez votre visa de travail pour l'Allemagne. Nous vous aidons à naviguer les exigences légales et à préparer un dossier solide.",
-    backgroundImage: "/img3.svg",
-    buttons: [{ text: "En savoir plus", href: "#visa-travail", variant: "outline" }],
-  },
-  {
-    id: 4,
-    title: "Visa Étudiant - Poursuivez Vos Études",
-    description:
-      "L'Allemagne offre d'excellentes opportunités d'études. Nous facilitons votre demande de visa étudiant et votre inscription universitaire.",
-    backgroundImage: "/img4.svg",
-    buttons: [{ text: "Visa étudiant", href: "#visa-etudiant", variant: "outline" }],
-  },
-  {
-    id: 5,
-    title: "Regroupement Familial - Réunissez Votre Famille",
-    description:
-      "Faites venir votre famille en Allemagne en toute légalité. Nous vous accompagnons dans les démarches de regroupement familial.",
-    backgroundImage: "/img5.svg",
-    buttons: [{ text: "Regroupement familial", href: "#regroupement", variant: "outline" }],
-  },
-  {
-    id: 6,
-    title: "Visa Investisseur - Développez Votre Business",
-    description:
-      "Créez ou investissez dans une entreprise en Allemagne. Nous vous guidons pour obtenir votre visa d'investisseur et réussir votre projet.",
-    backgroundImage: "/img6.svg",
-    buttons: [{ text: "Visa investisseur", href: "#visa-investisseur", variant: "outline" }],
-  },
-]
-
 export function HeroSection() {
+  const { t, translations } = useLanguage()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [slideKey, setSlideKey] = useState(0) // Pour forcer la re-animation du BlurText
+  const [slideKey, setSlideKey] = useState(0)
+
+  // Créer les slides dynamiquement à partir des traductions
+  const heroSlides: HeroSlide[] = [
+    {
+      id: 1,
+      title: t("hero.slide1.title"),
+      description: t("hero.slide1.description"),
+      backgroundImage: "/img1.svg",
+      buttons: [{ text: t("hero.slide1.button"), href: "#services", variant: "outline" }],
+    },
+    {
+      id: 2,
+      title: t("hero.slide2.title"),
+      description: t("hero.slide2.description"),
+      backgroundImage: "/img2.svg",
+      buttons: [{ text: t("hero.slide2.button"), href: "/contact", variant: "outline" }],
+    },
+    {
+      id: 3,
+      title: t("hero.slide3.title"),
+      description: t("hero.slide3.description"),
+      backgroundImage: "/img3.svg",
+      buttons: [{ text: t("hero.slide3.button"), href: "#visa-travail", variant: "outline" }],
+    },
+    {
+      id: 4,
+      title: t("hero.slide4.title"),
+      description: t("hero.slide4.description"),
+      backgroundImage: "/img4.svg",
+      buttons: [{ text: t("hero.slide4.button"), href: "#visa-etudiant", variant: "outline" }],
+    },
+    {
+      id: 5,
+      title: t("hero.slide5.title"),
+      description: t("hero.slide5.description"),
+      backgroundImage: "/img5.svg",
+      buttons: [{ text: t("hero.slide5.button"), href: "#regroupement", variant: "outline" }],
+    },
+    {
+      id: 6,
+      title: t("hero.slide6.title"),
+      description: t("hero.slide6.description"),
+      backgroundImage: "/img6.svg",
+      buttons: [{ text: t("hero.slide6.button"), href: "#visa-investisseur", variant: "outline" }],
+    },
+  ]
 
   useEffect(() => {
     if (!isPlaying) return
@@ -81,13 +78,13 @@ export function HeroSection() {
       setIsTransitioning(true)
       setTimeout(() => {
         setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-        setSlideKey(prev => prev + 1) // Incrémente la clé pour re-déclencher l'animation
+        setSlideKey(prev => prev + 1)
         setIsTransitioning(false)
       }, 150)
-    }, 15000) // Changé de 5000ms (5s) à 60000ms (60s)
+    }, 15000)
 
     return () => clearInterval(interval)
-  }, [isPlaying])
+  }, [isPlaying, heroSlides.length])
 
   const goToSlide = (index: number) => {
     if (index !== currentSlide) {
