@@ -100,6 +100,12 @@ export interface Translations {
     quote: string
     duration: string
     success_rate: string
+    student_steps: string[]
+    work_steps: string[]
+    freelance_steps: string[]
+    family_steps: string[]
+    business_steps: string[]
+    tourist_steps: string[]
   }
   methodology: {
     badge: string
@@ -137,6 +143,18 @@ export interface Translations {
     office_info: string
     directions: string
     view_larger: string
+    available: string
+    how_to_reach: string
+    contact_methods_desc: string
+    find_us: string
+    visit_office: string
+    office_location_desc: string
+    germany: string
+    weekend_appointment: string
+    how_to_reach_us: string
+    by_car: string
+    by_public_transport: string
+    by_foot: string
   }
   impressum: {
     badge: string
@@ -278,6 +296,42 @@ export const translations: Record<Language, Translations> = {
       quote: "Demander un accompagnement",
       duration: "Délai d'obtention",
       success_rate: "Taux de réussite",
+      student_steps: [
+        "Évaluation de votre profil académique et sélection d'un programme d'études adapté",
+        "Préparation des documents requis (diplômes, certificats de langue, etc.)",
+        "Constitution du dossier de demande de visa avec notre assistance",
+        "Accompagnement personnalisé jusqu'à l'obtention de votre visa",
+      ],
+      work_steps: [
+        "Évaluation de vos qualifications professionnelles et de votre expérience",
+        "Assistance dans la recherche d'emploi et la négociation du contrat",
+        "Préparation complète du dossier de visa travail",
+        "Support dans les démarches administratives post-arrivée",
+      ],
+      freelance_steps: [
+        "Analyse de votre projet professionnel et validation de sa viabilité",
+        "Aide à l'élaboration du business plan et des prévisions financières",
+        "Constitution du dossier de visa freelance complet",
+        "Accompagnement dans l'établissement de votre activité en Allemagne",
+      ],
+      family_steps: [
+        "Vérification de l'éligibilité et des conditions requises",
+        "Préparation des documents officiels et traductions nécessaires",
+        "Montage du dossier de regroupement familial",
+        "Suivi personnalisé jusqu'à la réunification de votre famille",
+      ],
+      business_steps: [
+        "Évaluation de votre projet d'investissement et de sa faisabilité",
+        "Assistance dans l'élaboration du business plan et structure juridique",
+        "Préparation du dossier de visa investisseur",
+        "Support dans l'établissement de votre entreprise en Allemagne",
+      ],
+      tourist_steps: [
+        "Vérification des conditions d'éligibilité pour le visa touristique",
+        "Aide à la planification de votre séjour et réservations",
+        "Préparation du dossier de demande Schengen",
+        "Assistance jusqu'à l'obtention de votre visa",
+      ],
     },
     methodology: {
       badge: "Notre Approche",
@@ -315,6 +369,18 @@ export const translations: Record<Language, Translations> = {
       office_info: "Notre Bureau",
       directions: "Obtenir l'itinéraire",
       view_larger: "Voir sur Google Maps",
+      available: "À Votre Disposition",
+      how_to_reach: "Comment Nous Joindre",
+      contact_methods_desc: "Sélectionnez la méthode de contact qui vous convient le mieux pour une réponse adaptée à vos besoins",
+      find_us: "Nous Localiser",
+      visit_office: "Visitez Notre Cabinet",
+      office_location_desc: "Idéalement situé au cœur de Düren, notre bureau est facilement accessible par différents moyens de transport",
+      germany: "Allemagne",
+      weekend_appointment: "Weekend: Sur rendez-vous uniquement",
+      how_to_reach_us: "Comment Nous Rejoindre",
+      by_car: "En voiture : Stationnement gratuit disponible à proximité de nos bureaux",
+      by_public_transport: "En transport en commun : Arrêt de bus à moins de 200m",
+      by_foot: "À pied : 10 minutes depuis le centre-ville de Düren",
     },
     impressum: {
       badge: "Mentions Légales",
@@ -454,6 +520,42 @@ export const translations: Record<Language, Translations> = {
       quote: "Begleitung anfordern",
       duration: "Bearbeitungszeit",
       success_rate: "Erfolgsrate",
+      student_steps: [
+        "Bewertung Ihres akademischen Profils und Auswahl eines geeigneten Studienprogramms",
+        "Vorbereitung der erforderlichen Dokumente (Diplome, Sprachzertifikate usw.)",
+        "Zusammenstellung des Visumantrags mit unserer Unterstützung",
+        "Individuelle Begleitung bis zur Erteilung Ihres Visums",
+      ],
+      work_steps: [
+        "Bewertung Ihrer beruflichen Qualifikationen und Erfahrung",
+        "Unterstützung bei der Jobsuche und Vertragsverhandlung",
+        "Vollständige Vorbereitung des Arbeitsvisumantrags",
+        "Unterstützung bei den administrativen Schritten nach der Ankunft",
+      ],
+      freelance_steps: [
+        "Analyse Ihres beruflichen Projekts und Validierung seiner Machbarkeit",
+        "Hilfe bei der Erstellung des Businessplans und der Finanzprognosen",
+        "Zusammenstellung des vollständigen Freelancer-Visumantrags",
+        "Begleitung beim Aufbau Ihrer Tätigkeit in Deutschland",
+      ],
+      family_steps: [
+        "Überprüfung der Zulässigkeit und der erforderlichen Bedingungen",
+        "Vorbereitung offizieller Dokumente und erforderlicher Übersetzungen",
+        "Zusammenstellung des Familiennachzugsantrags",
+        "Persönliche Begleitung bis zur Wiedervereinigung Ihrer Familie",
+      ],
+      business_steps: [
+        "Bewertung Ihres Investitionsprojekts und seiner Machbarkeit",
+        "Unterstützung bei der Erstellung des Businessplans und der Rechtsstruktur",
+        "Vorbereitung des Investorenvisumantrags",
+        "Unterstützung beim Aufbau Ihres Unternehmens in Deutschland",
+      ],
+      tourist_steps: [
+        "Überprüfung der Zulässigkeitsbedingungen für das Touristenvisum",
+        "Hilfe bei der Planung Ihrer Reise und Reservierungen",
+        "Vorbereitung des Schengen-Antragsdossiers",
+        "Unterstützung bis zur Erteilung Ihres Visums",
+      ],
     },
     methodology: {
       badge: "Unser Ansatz",
@@ -491,6 +593,18 @@ export const translations: Record<Language, Translations> = {
       office_info: "Unser Büro",
       directions: "Route abrufen",
       view_larger: "Auf Google Maps anzeigen",
+      available: "Zu Ihrer Verfügung",
+      how_to_reach: "Wie Sie uns erreichen",
+      contact_methods_desc: "Wählen Sie die Kontaktmethode, die am besten zu Ihnen passt, für eine maßgeschneiderte Antwort auf Ihre Bedürfnisse",
+      find_us: "Finden Sie uns",
+      visit_office: "Besuchen Sie unser Büro",
+      office_location_desc: "Ideal im Herzen von Düren gelegen, ist unser Büro leicht mit verschiedenen Verkehrsmitteln erreichbar",
+      germany: "Deutschland",
+      weekend_appointment: "Wochenende: Nur nach Vereinbarung",
+      how_to_reach_us: "Wie Sie uns erreichen",
+      by_car: "Mit dem Auto: Kostenlose Parkplätze in der Nähe unseres Büros verfügbar",
+      by_public_transport: "Mit öffentlichen Verkehrsmitteln: Bushaltestelle weniger als 200m entfernt",
+      by_foot: "Zu Fuß: 10 Minuten vom Stadtzentrum Düren",
     },
     impressum: {
       badge: "Impressum",

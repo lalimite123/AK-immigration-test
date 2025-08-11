@@ -119,11 +119,11 @@ export default function Contact() {
                     <div className="text-center mb-16">
                         <Badge variant="outline" className="border-blue-200 text-blue-600 mb-4">
                             <CheckCircle className="w-4 h-4 mr-2" />
-                            À Votre Disposition
+                            {t("contact.available")}
                         </Badge>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Comment Nous Joindre</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">{t("contact.how_to_reach")}</h2>
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg text-justify">
-                            Sélectionnez la méthode de contact qui vous convient le mieux pour une réponse adaptée à vos besoins
+                            {t("contact.contact_methods_desc")}
                         </p>
                     </div>
 
@@ -162,11 +162,11 @@ export default function Contact() {
                     <div className="text-center mb-16">
                         <Badge variant="outline" className="border-blue-200 text-blue-600 mb-4">
                             <MapPin className="w-4 h-4 mr-2" />
-                            Nous Localiser
+                            {t("contact.find_us")}
                         </Badge>
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Visitez Notre Cabinet</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">{t("contact.visit_office")}</h2>
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg text-justify">
-                            Idéalement situé au cœur de Düren, notre bureau est facilement accessible par différents moyens de transport
+                            {t("contact.office_location_desc")}
                         </p>
                     </div>
 
@@ -227,7 +227,7 @@ export default function Contact() {
                                                     <br />
                                                     52349 Düren
                                                     <br />
-                                                    Allemagne
+                                                    {t("contact.germany")}
                                                 </p>
                                             </div>
                                         </div>
@@ -255,7 +255,7 @@ export default function Contact() {
                                             </div>
                                             <div>
                                                 <p className="text-gray-900 font-semibold">Lun-Ven: 8h-18h</p>
-                                                <p className="text-gray-600 text-sm">Weekend: Sur rendez-vous uniquement</p>
+                                                <p className="text-gray-600 text-sm">{t("contact.weekend_appointment")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -266,20 +266,20 @@ export default function Contact() {
                                 <CardContent className="p-6">
                                     <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                                         <Navigation className="w-5 h-5 text-blue-600" />
-                                        Comment Nous Rejoindre
+                                        {t("contact.how_to_reach_us")}
                                     </h3>
                                     <div className="space-y-3 text-gray-600">
                                         <p className="flex items-start gap-2 text-justify">
                                             <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                                            <span>En voiture : Stationnement gratuit disponible à proximité de nos bureaux</span>
+                                            <span>{t("contact.by_car")}</span>
                                         </p>
                                         <p className="flex items-start gap-2 text-justify">
                                             <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                                            <span>En transport en commun : Arrêt de bus à moins de 200m</span>
+                                            <span>{t("contact.by_public_transport")}</span>
                                         </p>
                                         <p className="flex items-start gap-2 text-justify">
                                             <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
-                                            <span>À pied : 10 minutes depuis le centre-ville de Düren</span>
+                                            <span>{t("contact.by_foot")}</span>
                                         </p>
                                     </div>
                                     <Button

@@ -159,7 +159,7 @@ export function HeroSection() {
           }`}>
             {/* Title avec BlurText */}
             <BlurText
-              text={currentSlideData.title}
+              text={Array.isArray(currentSlideData.title) ? currentSlideData.title.join("   ") : currentSlideData.title.replace(/ /g, "   ")}
               delay={95}
               animateBy="words"
               direction="top"

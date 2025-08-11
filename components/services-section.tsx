@@ -35,12 +35,6 @@ const visaData = [
         color: "from-blue-500 to-blue-600",
         duration: "2-8 semaines",
         successRate: "95%",
-        steps: [
-            "Évaluation de votre profil académique et sélection d'un programme d'études adapté",
-            "Préparation des documents requis (diplômes, certificats de langue, etc.)",
-            "Constitution du dossier de demande de visa avec notre assistance",
-            "Accompagnement personnalisé jusqu'à l'obtention de votre visa",
-        ],
     },
     {
         id: "work",
@@ -50,12 +44,6 @@ const visaData = [
         color: "from-green-500 to-green-600",
         duration: "3-6 semaines",
         successRate: "92%",
-        steps: [
-            "Évaluation de vos qualifications professionnelles et de votre expérience",
-            "Assistance dans la recherche d'emploi et la négociation du contrat",
-            "Préparation complète du dossier de visa travail",
-            "Support dans les démarches administratives post-arrivée",
-        ],
     },
     {
         id: "freelance",
@@ -65,12 +53,6 @@ const visaData = [
         color: "from-purple-500 to-purple-600",
         duration: "4-8 semaines",
         successRate: "88%",
-        steps: [
-            "Analyse de votre projet professionnel et validation de sa viabilité",
-            "Aide à l'élaboration du business plan et des prévisions financières",
-            "Constitution du dossier de visa freelance complet",
-            "Accompagnement dans l'établissement de votre activité en Allemagne",
-        ],
     },
     {
         id: "family",
@@ -80,12 +62,6 @@ const visaData = [
         color: "from-pink-500 to-pink-600",
         duration: "6-12 semaines",
         successRate: "90%",
-        steps: [
-            "Vérification de l'éligibilité et des conditions requises",
-            "Préparation des documents officiels et traductions nécessaires",
-            "Montage du dossier de regroupement familial",
-            "Suivi personnalisé jusqu'à la réunification de votre famille",
-        ],
     },
     {
         id: "business",
@@ -95,12 +71,6 @@ const visaData = [
         color: "from-orange-500 to-orange-600",
         duration: "8-12 semaines",
         successRate: "85%",
-        steps: [
-            "Évaluation de votre projet d'investissement et de sa faisabilité",
-            "Assistance dans l'élaboration du business plan et structure juridique",
-            "Préparation du dossier de visa investisseur",
-            "Support dans l'établissement de votre entreprise en Allemagne",
-        ],
     },
     {
         id: "tourist",
@@ -110,23 +80,37 @@ const visaData = [
         color: "from-teal-500 to-teal-600",
         duration: "1-3 semaines",
         successRate: "98%",
-        steps: [
-            "Vérification des conditions d'éligibilité pour le visa touristique",
-            "Aide à la planification de votre séjour et réservations",
-            "Préparation du dossier de demande Schengen",
-            "Assistance jusqu'à l'obtention de votre visa",
-        ],
     },
 ]
 
 export function ServicesSection() {
-    const { t } = useLanguage()
+    const { t, language, translations } = useLanguage()
     const [selectedVisa, setSelectedVisa] = useState<(typeof visaData)[0] | null>(null)
     const [isOpen, setIsOpen] = useState(false)
 
     const openModal = (visa: (typeof visaData)[0]) => {
         setSelectedVisa(visa)
         setIsOpen(true)
+    }
+
+    const getStepsForVisa = (visaId: string): string[] => {
+        const svc = translations[language].services as any
+        switch (visaId) {
+            case "student":
+                return svc.student_steps || []
+            case "work":
+                return svc.work_steps || []
+            case "freelance":
+                return svc.freelance_steps || []
+            case "family":
+                return svc.family_steps || []
+            case "business":
+                return svc.business_steps || []
+            case "tourist":
+                return svc.tourist_steps || []
+            default:
+                return []
+        }
     }
 
     return (
@@ -261,81 +245,81 @@ export function ServicesSection() {
                             aria-hidden="true"
                         />
                         <div className="fixed inset-0 flex items-center justify-center p-4">
-                            <DialogPanel
-                                as={motion.div}
-                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                                className="bg-white rounded-2xl p-8 max-w-2xl w-full shadow-2xl max-h-[85vh] overflow-y-auto"
-                            >
-                                <div className="flex justify-between items-start mb-8">
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${selectedVisa.color} flex items-center justify-center shadow-lg`}
-                                        >
-                                            <selectedVisa.icon className="w-8 h-8 text-white" />
-                                        </div>
-                                        <div>
-                                            <DialogTitle className="text-2xl font-bold text-gray-900">{t(selectedVisa.titleKey)}</DialogTitle>
-                                            <p className="text-gray-600 mt-1 text-justify">{t(selectedVisa.descriptionKey)}</p>
-                                            <div className="flex gap-4 mt-3">
-                                                <Badge variant="outline" className="text-xs">
-                                                    <Clock className="w-3 h-3 mr-1" />
-                                                    {selectedVisa.duration}
-                                                </Badge>
-                                                <Badge variant="outline" className="text-xs">
-                                                    <CheckCircle className="w-3 h-3 mr-1" />
-                                                    {selectedVisa.successRate}
-                                                </Badge>
+                            <DialogPanel className="bg-white rounded-2xl p-8 max-w-2xl w-full shadow-2xl max-h-[85vh] overflow-y-auto">
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    transition={{ duration: 0.3, ease: "easeOut" }}
+                                >
+                                    <div className="flex justify-between items-start mb-8">
+                                        <div className="flex items-center gap-4">
+                                            <div
+                                                className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${selectedVisa.color} flex items-center justify-center shadow-lg`}
+                                            >
+                                                <selectedVisa.icon className="w-8 h-8 text-white" />
+                                            </div>
+                                            <div>
+                                                <DialogTitle className="text-2xl font-bold text-gray-900">{t(selectedVisa.titleKey)}</DialogTitle>
+                                                <p className="text-gray-600 mt-1 text-justify">{t(selectedVisa.descriptionKey)}</p>
+                                                <div className="flex gap-4 mt-3">
+                                                    <Badge variant="outline" className="text-xs">
+                                                        <Clock className="w-3 h-3 mr-1" />
+                                                        {selectedVisa.duration}
+                                                    </Badge>
+                                                    <Badge variant="outline" className="text-xs">
+                                                        <CheckCircle className="w-3 h-3 mr-1" />
+                                                        {selectedVisa.successRate}
+                                                    </Badge>
+                                                </div>
                                             </div>
                                         </div>
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            onClick={() => setIsOpen(false)}
+                                            className="text-gray-400 hover:text-gray-600"
+                                        >
+                                            <X className="w-6 h-6" />
+                                        </Button>
                                     </div>
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => setIsOpen(false)}
-                                        className="text-gray-400 hover:text-gray-600"
-                                    >
-                                        <X className="w-6 h-6" />
-                                    </Button>
-                                </div>
 
-                                <div className="mb-8">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-6">
-                                        {t("services.steps")} {t(selectedVisa.titleKey)}
-                                    </h3>
-                                    <div className="space-y-4">
-                                        {selectedVisa.steps.map((step, index) => (
-                                            <motion.div
-                                                key={index}
-                                                initial={{ opacity: 0, x: -20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: index * 0.1 }}
-                                                className="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl"
-                                            >
-                                                <div
-                                                    className={`w-8 h-8 rounded-full bg-gradient-to-r ${selectedVisa.color} flex items-center justify-center flex-shrink-0 shadow-sm`}
+                                    <div className="mb-8">
+                                        <h3 className="text-xl font-bold text-gray-900 mb-6">
+                                            {t("services.steps")} {t(selectedVisa.titleKey)}
+                                        </h3>
+                                        <div className="space-y-4">
+                                            {getStepsForVisa(selectedVisa.id).map((step, index) => (
+                                                <motion.div
+                                                    key={index}
+                                                    initial={{ opacity: 0, x: -20 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    transition={{ delay: index * 0.1 }}
+                                                    className="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl"
                                                 >
-                                                    <span className="text-white text-sm font-bold">{index + 1}</span>
-                                                </div>
-                                                <span className="text-gray-700 leading-relaxed pt-1 text-justify">{step}</span>
-                                            </motion.div>
-                                        ))}
+                                                    <div
+                                                        className={`w-8 h-8 rounded-full bg-gradient-to-r ${selectedVisa.color} flex items-center justify-center flex-shrink-0 shadow-sm`}
+                                                    >
+                                                        <span className="text-white text-sm font-bold">{index + 1}</span>
+                                                    </div>
+                                                    <span className="text-gray-700 leading-relaxed pt-1 text-justify">{step}</span>
+                                                </motion.div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="flex gap-4 pt-6 border-t border-gray-100">
-                                    <Button variant="outline" onClick={() => setIsOpen(false)} className="flex-1">
-                                        {t("services.close")}
-                                    </Button>
-                                    <Button
-                                        className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
-                                        onClick={() => window.open("/contact", "_blank")}
-                                    >
-                                        {t("services.quote")}
-                                    </Button>
-                                </div>
+                                    <div className="flex gap-4 pt-6 border-t border-gray-100">
+                                        <Button variant="outline" onClick={() => setIsOpen(false)} className="flex-1">
+                                            {t("services.close")}
+                                        </Button>
+                                        <Button
+                                            className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                                            onClick={() => window.open("/contact", "_blank")}
+                                        >
+                                            {t("services.quote")}
+                                        </Button>
+                                    </div>
+                                </motion.div>
                             </DialogPanel>
                         </div>
                     </Dialog>
