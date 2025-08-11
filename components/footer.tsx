@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, MessageCircleCodeIcon } from "lucide-react"
+import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, MessageCircleCodeIcon, LogIn } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useLanguage } from "@/contexts/LanguageContext"
@@ -134,6 +134,14 @@ const Footer = () => {
                                         )}
                                     </div>
                                 ))}
+                                <div className="pt-2">
+                                    <Link href="/admin">
+                                        <Button size="sm" className="bg-white text-blue-700 hover:bg-blue-50 hover:text-blue-800">
+                                            <LogIn className="w-4 h-4 mr-2" />
+                                            {t("footer.admin_login")}
+                                        </Button>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>

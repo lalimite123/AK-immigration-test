@@ -183,6 +183,7 @@ export interface Translations {
     contact_title: string
     rights: string
     designed: string
+    admin_login: string
   }
   common: {
     language_selector: string
@@ -409,6 +410,7 @@ export const translations: Record<Language, Translations> = {
       contact_title: "Contactez-Nous",
       rights: "Tous droits réservés",
       designed: "Conçu par AKOR Immigration",
+      admin_login: "Connexion Admin",
     },
     common: {
       language_selector: "FR Français",
@@ -633,6 +635,7 @@ export const translations: Record<Language, Translations> = {
       contact_title: "Kontaktieren Sie uns",
       rights: "Alle Rechte vorbehalten",
       designed: "Entworfen von AKOR Immigration",
+      admin_login: "Admin-Anmeldung",
     },
     common: {
       language_selector: "DE Deutsch",
